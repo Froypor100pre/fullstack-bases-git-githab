@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="Prendas esenciales con carácter. Descubre la nueva colección de ropa de NÓRDICA.">
+  <title>NÓRDICA — Ropa para todos los días</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f3ed;
+      --ink: #20231f;
+      --muted: #76786f;
+      --line: #d9d8cf;
+      --green: #355c45;
+      --lime: #d4ed72;
+      --white: #fffefa;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    button, a { color: inherit; font: inherit; }
+    a { text-decoration: none; }
+    button { cursor: pointer; }
+    .announcement { min-height: 34px; display: grid; place-items: center; padding: 7px 16px; background: var(--green); color: white; font-size: 11px; letter-spacing: .08em; text-align: center; }
+    .site-header { height: 78px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 6.2%; border-bottom: 1px solid var(--line); }
+    .nav-links { display: flex; align-items: center; gap: 27px; font-size: 12px; }
+    .nav-links a, .header-actions button { transition: opacity .2s ease; }
+    .nav-links a:hover, .header-actions button:hover { opacity: .6; }
+    .brand { font-size: 22px; font-weight: 700; letter-spacing: .22em; }
+    .header-actions { display: flex; justify-content: flex-end; align-items: center; gap: 20px; }
+    .header-actions button { position: relative; border: 0; background: none; padding: 7px 0; font-size: 12px; }
+    .bag-count { display: inline-grid; width: 18px; height: 18px; margin-left: 5px; place-items: center; border-radius: 50%; background: var(--lime); font-size: 10px; font-weight: 700; }
+    .hero { position: relative; min-height: 590px; margin: 22px 2.2% 0; overflow: hidden; background: #a1a498; }
+    .hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+    .hero::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgba(17, 25, 19, .58), rgba(17, 25, 19, .05) 75%); }
+    .hero-copy { position: relative; z-index: 1; display: flex; min-height: 590px; max-width: 660px; flex-direction: column; align-items: flex-start; justify-content: center; padding: 50px 9%; color: white; animation: rise .7s ease both; }
+    .eyebrow { margin: 0 0 18px; font-size: 10px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 { max-width: 500px; margin-bottom: 18px; font-family: var(--serif); font-size: clamp(46px, 6vw, 76px); font-weight: 500; line-height: 1.02; }
+    .hero-copy > p:not(.eyebrow) { max-width: 365px; margin-bottom: 29px; color: rgba(255,255,255,.88); font-size: 14px; line-height: 1.7; }
+    .button { display: inline-flex; min-height: 47px; align-items: center; justify-content: center; gap: 12px; border: 1px solid transparent; padding: 0 20px; background: var(--lime); color: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .06em; transition: background .2s ease, transform .2s ease; }
+    .button:hover { transform: translateY(-2px); background: #e0f68d; }
+    .hero-note { position: absolute; z-index: 1; right: 26px; bottom: 23px; color: white; font-size: 10px; letter-spacing: .1em; }
+    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 25px 10%; border-bottom: 1px solid var(--line); text-align: center; }
+    .benefits p { margin: 0; font-size: 11px; }
+    .benefits span { margin-right: 7px; color: var(--green); font-size: 14px; }
+    .collection { padding: 86px 7% 95px; }
+    .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .section-heading .eyebrow { margin-bottom: 10px; color: var(--green); }
+    .section-heading h2 { margin-bottom: 0; font-family: var(--serif); font-size: 42px; font-weight: 500; }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .filter { border: 1px solid var(--line); border-radius: 99px; padding: 9px 14px; background: transparent; font-size: 10px; transition: background .2s, color .2s, border-color .2s; }
+    .filter:hover, .filter[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: white; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .product-card { min-width: 0; animation: rise .45s ease both; }
+    .product-image-wrap { position: relative; overflow: hidden; background: #e6e4dc; aspect-ratio: 4 / 5; }
+    .product-image { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+    .product-card:hover .product-image { transform: scale(1.04); }
+    .tag { position: absolute; top: 12px; left: 12px; padding: 6px 8px; background: var(--white); font-size: 9px; letter-spacing: .04em; }
+    .add-button { position: absolute; right: 11px; bottom: 11px; left: 11px; min-height: 42px; border: 0; background: var(--white); font-size: 10px; font-weight: 600; transition: background .2s, color .2s; }
+    .add-button:hover { background: var(--green); color: white; }
+    .product-meta { display: flex; justify-content: space-between; gap: 10px; padding-top: 12px; font-size: 11px; }
+    .product-name { margin: 0 0 5px; font-weight: 600; }
+    .product-detail { margin: 0; color: var(--muted); font-size: 10px; }
+    .product-price { flex: 0 0 auto; font-size: 11px; }
+    .story { display: grid; min-height: 430px; grid-template-columns: 1fr 1fr; background: #e6e6dc; }
+    .story-image { width: 100%; height: 100%; min-height: 430px; object-fit: cover; }
+    .story-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 70px 12%; }
+    .story-copy .eyebrow { color: var(--green); }
+    .story-copy h2 { max-width: 400px; margin-bottom: 16px; font-family: var(--serif); font-size: 42px; font-weight: 500; line-height: 1.1; }
+    .story-copy p:not(.eyebrow) { max-width: 390px; margin-bottom: 25px; color: #595d54; font-size: 13px; line-height: 1.8; }
+    .button-dark { min-height: 43px; background: var(--ink); color: white; }
+    .button-dark:hover { background: var(--green); }
+    .newsletter { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding: 67px 9%; border-bottom: 1px solid var(--line); }
+    .newsletter h2 { margin-bottom: 7px; font-family: var(--serif); font-size: 30px; font-weight: 500; }
+    .newsletter p { margin-bottom: 0; color: var(--muted); font-size: 11px; }
+    .newsletter-form { display: flex; width: min(100%, 400px); border-bottom: 1px solid var(--ink); }
+    .newsletter-form input { width: 100%; min-width: 0; border: 0; outline: 0; padding: 13px 3px; background: transparent; font: inherit; font-size: 11px; }
+    .newsletter-form button { border: 0; background: transparent; font-size: 11px; font-weight: 700; }
+    .footer { display: flex; justify-content: space-between; gap: 24px; padding: 27px 7%; color: var(--muted); font-size: 10px; }
+    .footer p { margin: 0; }
+    .toast { position: fixed; z-index: 5; right: 22px; bottom: 22px; max-width: calc(100vw - 44px); padding: 14px 18px; background: var(--ink); color: white; font-size: 12px; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity .2s, transform .2s; }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+    @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 760px) {
+      .site-header { height: 66px; grid-template-columns: 1fr auto 1fr; padding: 0 5%; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 10px; }
+      .nav-links a:nth-child(2) { display: none; }
+      .brand { font-size: 18px; }
+      .header-actions { gap: 10px; }
+      .header-actions button:first-child { display: none; }
+      .hero { min-height: 520px; margin: 12px 3% 0; }
+      .hero-copy { min-height: 520px; padding: 45px 8%; }
+      .hero h1 { font-size: clamp(45px, 11vw, 65px); }
+      .benefits { gap: 12px; padding: 20px 4%; }
+      .benefits p { font-size: 9px; line-height: 1.5; }
+      .benefits span { display: block; margin: 0 0 5px; }
+      .collection { padding: 62px 5% 70px; }
+      .section-heading { align-items: flex-start; flex-direction: column; margin-bottom: 22px; }
+      .section-heading h2 { font-size: 36px; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 12px; }
+      .story { grid-template-columns: 1fr; }
+      .story-image { min-height: 330px; max-height: 420px; }
+      .story-copy { padding: 52px 8%; }
+      .story-copy h2 { font-size: 36px; }
+      .newsletter { align-items: flex-start; flex-direction: column; padding: 52px 7%; }
+      .newsletter-form { width: 100%; }
+      .footer { flex-direction: column; padding: 24px 7%; }
+    }
+    @media (max-width: 390px) {
+      .nav-links a { font-size: 9px; }
+      .brand { font-size: 15px; letter-spacing: .17em; }
+      .header-actions button { font-size: 10px; }
+      .product-meta { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">ENVÍO GRATIS EN PEDIDOS SUPERIORES A 80 €</div>
+  <header class="site-header">
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#coleccion">Tienda</a>
+      <a href="#historia">La marca</a>
+    </nav>
+    <a class="brand" href="#inicio" aria-label="Nórdica, inicio">Multimarca Cafiecy</a>
+    <div class="header-actions">
+      <button type="button" aria-label="Buscar">Buscar</button>
+      <button type="button" aria-label="Bolsa de compra">Bolsa <span class="bag-count" aria-live="polite">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2000&q=85" alt="Modelo con un conjunto contemporáneo en tonos neutros">
+      <div class="hero-copy">
+        <p class="eyebrow">Colección otoño · 2026</p>
+        <h1 id="hero-title">Vestir bien.<br>Sentirse mejor.</h1>
+        <p>Prendas versátiles, materiales honestos y diseño pensado para acompañarte cada día.</p>
+        <a class="button" href="#coleccion">DESCUBRIR LA COLECCIÓN <span aria-hidden="true">↗</span></a>
+      </div>
+      <span class="hero-note">01 / NUEVA TEMPORADA</span>
+    </section>
+
+    <section class="benefits" aria-label="Ventajas de comprar en Nórdica">
+      <p><span aria-hidden="true">✳</span> Materiales seleccionados</p>
+      <p><span aria-hidden="true">↗</span> Envío gratis desde 80 €</p>
+      <p><span aria-hidden="true">↺</span> Cambios fáciles en 30 días</p>
+    </section>
+
+    <section class="collection" id="coleccion" aria-labelledby="collection-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Hecho para repetir</p>
+          <h2 id="collection-title">Piezas favoritas</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filtrar productos">
+          <button class="filter" type="button" data-filter="todos" aria-pressed="true">Todo</button>
+          <button class="filter" type="button" data-filter="novedades" aria-pressed="false">Novedades</button>
+          <button class="filter" type="button" data-filter="basicos" aria-pressed="false">Básicos</button>
+          <button class="filter" type="button" data-filter="accesorios" aria-pressed="false">Accesorios</button>
+        </div>
+      </div>
+      <div class="product-grid" aria-live="polite">
+        <article class="product-card" data-category="novedades">
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=850&q=80" alt="Chaqueta de corte amplio en tono camel" loading="lazy">
+            <span class="tag">NUEVO</span>
+            <button class="add-button" type="button" data-product="Chaqueta Alba">AÑADIR A LA BOLSA +</button>
+          </div>
+          <div class="product-meta"><div><p class="product-name">Chaqueta Alba</p><p class="product-detail">Algodón reciclado · Arena</p></div><span class="product-price">89 €</span></div>
+        </article>
+        <article class="product-card" data-category="basicos novedades">
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=850&q=80" alt="Prenda exterior de cuero en color oscuro" loading="lazy">
+            <span class="tag">MÁS VENDIDO</span>
+            <button class="add-button" type="button" data-product="Sobrecamisa Norte">AÑADIR A LA BOLSA +</button>
+          </div>
+          <div class="product-meta"><div><p class="product-name">Sobrecamisa Norte</p><p class="product-detail">Sarga orgánica · Oliva</p></div><span class="product-price">74 €</span></div>
+        </article>
+        <article class="product-card" data-category="basicos">
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=850&q=80" alt="Camiseta básica de algodón en tono claro" loading="lazy">
+            <span class="tag">ESENCIAL</span>
+            <button class="add-button" type="button" data-product="Camiseta Bruma">AÑADIR A LA BOLSA +</button>
+          </div>
+          <div class="product-meta"><div><p class="product-name">Camiseta Bruma</p><p class="product-detail">Algodón supima · Crudo</p></div><span class="product-price">32 €</span></div>
+        </article>
+        <article class="product-card" data-category="accesorios novedades">
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=850&q=80" alt="Bolso minimalista de piel en tono neutro" loading="lazy">
+            <span class="tag">NUEVO</span>
+            <button class="add-button" type="button" data-product="Bolso Orilla">AÑADIR A LA BOLSA +</button>
+          </div>
+          <div class="product-meta"><div><p class="product-name">Bolso Orilla</p><p class="product-detail">Piel responsable · Avellana</p></div><span class="product-price">68 €</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story" id="historia" aria-labelledby="story-title">
+      <img class="story-image" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="Amigas disfrutando juntas de una tarde de compras" loading="lazy">
+      <div class="story-copy">
+        <p class="eyebrow">Menos, pero mejor</p>
+        <h2 id="story-title">Un armario que se siente como tú.</h2>
+        <p>Diseñamos ropa que no necesita una ocasión especial. Siluetas cómodas, buenos tejidos y detalles que hacen que quieras volver a ponértela.</p>
+        <a class="button button-dark" href="#coleccion">CONOCE NÓRDICA <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="newsletter" aria-labelledby="newsletter-title">
+      <div><h2 id="newsletter-title">Una nota de vez en cuando.</h2><p>Novedades, ideas para vestir y un 10 % en tu primera compra.</p></div>
+      <form class="newsletter-form">
+        <label class="sr-only" for="email">Tu correo electrónico</label>
+        <input id="email" name="email" type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">APUNTARME ↗</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer"><p>© 2026 NÓRDICA · Ropa para todos los días</p><p>Instagram &nbsp; · &nbsp; Envíos y devoluciones &nbsp; · &nbsp; Contacto</p></footer>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const filters = document.querySelectorAll('.filter');
+    const products = document.querySelectorAll('.product-card');
+    const cartCount = document.querySelector('.bag-count');
+    const toast = document.querySelector('.toast');
+    let itemCount = 0;
+    let toastTimer;
+
+    filters.forEach((filter) => {
+      filter.addEventListener('click', () => {
+        const category = filter.dataset.filter;
+        filters.forEach((button) => button.setAttribute('aria-pressed', String(button === filter)));
+        products.forEach((product) => {
+          product.hidden = category !== 'todos' && !product.dataset.category.split(' ').includes(category);
+        });
+      });
+    });
+
+    document.querySelectorAll('.add-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        itemCount += 1;
+        cartCount.textContent = String(itemCount);
+        toast.textContent = `${button.dataset.product} se añadió a tu bolsa.`;
+        toast.classList.add('visible');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => toast.classList.remove('visible'), 2400);
+      });
+    });
+
+    document.querySelector('.newsletter-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = document.querySelector('#email');
+      toast.textContent = `¡Gracias! Te escribiremos a ${email.value}.`;
+      toast.classList.add('visible');
+      email.value = '';
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('visible'), 3000);
+    });
+  </script>
+</body>
+</html>
